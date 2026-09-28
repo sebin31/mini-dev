@@ -17,7 +17,7 @@ interface Item {
   template: `
     <div style="max-width:600px;margin:40px auto;padding:0 16px;">
       <h1>Mini TWISE</h1>
-      <p>Angular frontend &rarr; Nginx &rarr; ASP.NET Core API &rarr; SQL Server</p>
+      <p>Angular frontend &rarr; Nginx &rarr; ASP.NET Core API &rarr; PostgreSQL</p>
 
       <div style="display:flex;gap:8px;margin-bottom:16px;">
         <input [(ngModel)]="newName" placeholder="Item name" style="flex:1;padding:8px;" />
