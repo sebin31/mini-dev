@@ -19,9 +19,9 @@ jobs:
       - name: Save current images for rollback
         run: |
           for svc in api frontend; do
-            if docker image inspect mini-twse-$svc:latest >/dev/null 2>&1; then
-              docker tag mini-twse-$svc:latest mini-twse-$svc:previous
-              echo "Saved mini-twse-$svc as previous"
+            if docker image inspect mini-dev-$svc:latest >/dev/null 2>&1; then
+              docker tag mini-dev-$svc:latest mini-dev-$svc:previous
+              echo "Saved mini-dev-$svc as previous"
             fi
           done
 
@@ -46,8 +46,8 @@ jobs:
         run: |
           echo "Deploy failed, rolling back"
           for svc in api frontend; do
-            if docker image inspect mini-twse-$svc:previous >/dev/null 2>&1; then
-              docker tag mini-twse-$svc:previous mini-twse-$svc:latest
+            if docker image inspect mini-dev-$svc:previous >/dev/null 2>&1; then
+              docker tag mini-dev-$svc:previous mini-dev-$svc:latest
             fi
           done
           docker compose up -d --no-build

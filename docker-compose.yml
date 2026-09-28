@@ -1,3 +1,4 @@
+name: mini-dev
 services:
   db:
     image: postgres:16-alpine
@@ -23,6 +24,7 @@ services:
     build:
       context: ./api
     container_name: minitwise_api
+    image: mini-dev-api
     environment:
       ConnectionStrings__Default: "Host=db;Port=5432;Database=MiniTwiseDb;Username=postgres;Password=YourStrong!Passw0rd;"
     ports:
@@ -37,6 +39,7 @@ services:
     build:
       context: ./frontend
     container_name: minitwise_frontend
+    image: mini-dev-frontend
     depends_on:
       - api
     networks:
@@ -61,3 +64,5 @@ networks:
 
 volumes:
   pg_data:
+
+
