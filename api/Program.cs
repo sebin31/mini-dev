@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using MiniTwise.Api.Data;
-using MiniTwise.Api.Models;
+using MiniDev.Api.Data;
+using MiniDev.Api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

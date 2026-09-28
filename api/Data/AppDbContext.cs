@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using MiniTwise.Api.Models;
+using MiniDev.Api.Models;
 
-namespace MiniTwise.Api.Data;
+namespace MiniDev.Api.Data;
 
 public class AppDbContext : DbContext
 {

@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY MiniTwise.Api.csproj ./
+COPY MiniDev.Api.csproj ./
 RUN dotnet restore
 
 COPY . .
@@ -16,4 +16,4 @@ COPY --from=build /app/publish .
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 
-ENTRYPOINT ["dotnet", "MiniTwise.Api.dll"]
+ENTRYPOINT ["dotnet", "MiniDev.Api.dll"]

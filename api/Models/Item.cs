@@ -1,4 +1,4 @@
-namespace MiniTwise.Api.Models;
+namespace MiniDev.Api.Models;
 
 public class Item
 {
