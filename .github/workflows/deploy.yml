@@ -16,6 +16,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Save current images for rollback
+        run: |
+          for svc in api frontend; do
+            if docker image inspect mini-twse-$svc:latest >/dev/null 2>&1; then
+              docker tag mini-twse-$svc:latest mini-twse-$svc:previous
+              echo "Saved mini-twse-$svc as previous"
+            fi
+          done
+
       - name: Build and start containers
         run: docker compose up --build -d --remove-orphans
 
@@ -30,8 +39,19 @@ jobs:
             sleep 5
           done
           echo "Health check failed"
-          docker compose logs --tail 50
           exit 1
+
+      - name: Roll back on failure
+        if: failure()
+        run: |
+          echo "Deploy failed, rolling back"
+          for svc in api frontend; do
+            if docker image inspect mini-twse-$svc:previous >/dev/null 2>&1; then
+              docker tag mini-twse-$svc:previous mini-twse-$svc:latest
+            fi
+          done
+          docker compose up -d --no-build
+          echo "Rolled back to previous images"
 
       - name: Clean up old images
         if: success()
