@@ -16,7 +16,7 @@ interface Item {
   imports: [CommonModule, FormsModule],
   template: `
     <div style="max-width:600px;margin:40px auto;padding:0 16px;">
-      <h1>Mini TWISE</h1>
+      <h1>Mini DEV</h1>
       <p>Angular frontend &rarr; Nginx &rarr; ASP.NET Core API &rarr; PostgreSQL</p>
 
       <div style="display:flex;gap:8px;margin-bottom:16px;">
