@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
     {
-        Title = "Mini TWISE API",
+        Title = "Mini DEV API",
         Version = "v1"
     });
 });
