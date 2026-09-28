@@ -1,0 +1,38 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build and start containers
+        run: docker compose up --build -d --remove-orphans
+
+      - name: Health check
+        run: |
+          for i in $(seq 1 12); do
+            if curl -fsS http://localhost:8080/health; then
+              echo "Deploy healthy"
+              exit 0
+            fi
+            echo "Waiting for app ($i/12)..."
+            sleep 5
+          done
+          echo "Health check failed"
+          docker compose logs --tail 50
+          exit 1
+
+      - name: Clean up old images
+        if: success()
+        run: docker image prune -f
