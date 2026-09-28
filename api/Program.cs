@@ -27,7 +27,7 @@ builder.Services.AddCors(options =>
         policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
-var app = builder.Build();
+var app = builder.Build(); throw new Exception("Deliberate failure to test rollback");
 
 // Swagger available in all environments for this learning project
 app.UseSwagger();
