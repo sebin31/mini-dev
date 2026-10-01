@@ -3,7 +3,7 @@
 Run these from the repo root, with Minikube started (minikube start --driver=docker).
 
 ## 1. Build images into Minikube
-    minikube image build -t mini-dev-api:v1 ./api
+    minikube image build -t mini-dev-api:v2 ./api
     minikube image build -t mini-dev-frontend:v1 ./frontend
 
 ## 2. Create the Secret and ConfigMap (these exist only in the cluster, not in Git)
@@ -17,9 +17,12 @@ Run these from the repo root, with Minikube started (minikube start --driver=doc
     kubectl apply -f k8s/frontend.yaml
     kubectl apply -f k8s/nginx.yaml
 
-## 4. Open the app
-    kubectl port-forward service/nginx 8080:80
-Then browse to http://localhost:8080 (keep that window open).
+## 4. Enable the Ingress and open the app
+    minikube addons enable ingress
+    kubectl apply -f k8s/ingress.yaml
+    minikube tunnel
+Run minikube tunnel in an Administrator PowerShell window and keep it open.
+Then browse to http://127.0.0.1
 
 ## Notes
 - Never delete the db-pvc PVC: the storage class reclaim policy is Delete, so the data goes with it.
