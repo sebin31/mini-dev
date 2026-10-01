@@ -3,6 +3,8 @@ name: Deploy to EC2
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'k8s/**'
   workflow_dispatch:
 
 concurrency:
