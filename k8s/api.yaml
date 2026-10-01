@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: api
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: api
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: mini-dev-api:v1
+          image: mini-dev-api:v2
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
